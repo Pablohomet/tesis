@@ -77,6 +77,9 @@ smg10<- smg10+theme_set(theme_bw())+
        x = "Date", y = "SWC (%)")
   #+scale_y_continuous(expand = c(0, 0))
 
+
+smg10a<-ggplotly(smg10)### convertimos el gráfico a plotly
+
 ###???precipitacion#####
 
 
@@ -131,12 +134,12 @@ PrecipDaily <- ggplot(precipitacion, aes(Date, mm)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),###eliminar la cuadricula del fondo
         panel.background = element_blank(), axis.line = element_line(colour = "black"))+
   theme(axis.text.x = element_text(angle=90, hjust=1, vjust=1))+
-  labs(title = "Total daily precipitation at the study site",
+  labs(title = "Daily precipitation at the study site",
        subtitle = "2016-2020",
        x = "Date", y = "Daily precipitation (mm)")
 
 
-
+PrecipDailya<-ggplotly(PrecipDaily)
 
 
   #scale_x_date(labels=date_format ("%b %y"), breaks=date_breaks("1 year")) +
@@ -150,6 +153,15 @@ PrecipDaily <- ggplot(precipitacion, aes(Date, mm)) +
 
 grid.newpage()
 grid.draw(rbind(ggplotGrob(smg10), ggplotGrob(PrecipDaily), size = "last"))
+
+a10<-subplot(smg10a, PrecipDailya,shareX=TRUE, titleY=TRUE,titleX=TRUE, nrows=2) %>%
+
+
+  layout(title = "Soil moisture at 10 cm depth")
+
+
+       
+
 
 
 
@@ -195,7 +207,7 @@ smg20<- smg20+theme_set(theme_bw())+
        subtitle = "20 cm depth",
        x = "Date", y = "SWC (%)")
 
-
+smg20a<-ggplotly(smg20)
 
 ###unimos PRECIPITACION CONN HUMEDAD 20####
 
@@ -204,6 +216,7 @@ smg20<- smg20+theme_set(theme_bw())+
 grid.newpage()
 grid.draw(rbind(ggplotGrob(smg20), ggplotGrob(PrecipDaily), size = "last"))
 
+a20<-subplot(smg20a, PrecipDailya,shareX=TRUE, titleY=TRUE,titleX=TRUE, nrows=2)
 
 #### 30 CM DE PROFUNDIDAD####
 # Line plot with multiple groups
@@ -248,7 +261,7 @@ smg30<- smg30+theme_set(theme_bw())+
        subtitle = "30 cm depth",
        x = "Date", y = "SWC (%)")
 
-
+smg30a<-ggplotly(smg30)
 
 ###unimos PRECIPITACION CONN HUMEDAD 30####
 
@@ -257,7 +270,7 @@ smg30<- smg30+theme_set(theme_bw())+
 grid.newpage()
 grid.draw(rbind(ggplotGrob(smg30), ggplotGrob(PrecipDaily), size = "last"))
 
-
+a30<-subplot(smg30a, PrecipDailya,shareX=TRUE, titleY=TRUE,titleX=TRUE, nrows=2)
 
 #### 40 CM DE PROFUNDIDAD####
 # Line plot with multiple groups
@@ -304,6 +317,7 @@ labs(title = "Soil moisture differences between climatic treatments ",
       x = "Date", y = "SWC (%)")
      #scale_x_date(date_labels = "%b%y",date_breaks = "1 month")+
 
+smg40a<-ggplotly(smg40)
 
 ###unimos PRECIPITACION CONN HUMEDAD 40####
 
